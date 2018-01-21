@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html
+
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"> </script>
+
+    <style type="text/css">
+        #text_area_1 {border:2px;
+            position:absolute;
+            width:300px;
+            height:400px;
+            top:40px;
+            left:35px;
+            overflow: visible;
+        }
+
+         #text_area_2 {border:2px;
+            position:absolute;
+            width:300px;
+            height:400px;
+            top:300px;
+            left:35px;
+            overflow: visible;
+        }
+
+
+       #choose_file {border:2px;
+            position:absolute;
+            width:300px;
+            height:400px;
+            top:500px;
+            left:35px;
+            overflow: visible;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+
+<div id=text_area_1>
+Work Area:
+<textarea rows="8" cols="50" id="myTextArea">
+</textarea>
+</div>
+
+<div id=text_area_2>
+<input type="button" value="Submit to Compute Connector" onClick="getString()" />
+<br>
+<br>
+<textarea rows="4" cols="50" id="myTextArea2">
+</textarea>
+</div>
+
+
+<script>
+
+function getString() {
+    console.log("Running getString");
+    var data = document.getElementById("myTextArea").value;
+    console.log(data);
+    document.getElementById("myTextArea2").value = data;
+
+}
+
+// loading the file
+</script>
+
+    <div id=choose_file>
+    <input type="file" id="openFile" />
+    <br>
+    <div id="inputFileContents">
+    0    
+    </div>
+    </div>
+
+    <script type="text/javascript">
+     document.getElementById("openFile").addEventListener('change', function() {
+        var fr = new FileReader();
+        fr.onload = function() {
+           if (this.result.length < 10000) {
+          document.getElementById("inputFileContents").innerHTML = "Read File Successfully: " + this.result.length + " characters read";
+          window.inputFileContents = this.result;
+          console.log(window.inputFileContents);
+          document.getElementById("myTextArea").value = window.inputFileContents;
+
+           } else {
+          document.getElementById("inputFileContents").innerHTML = "ERROR: The file you are trying to upload exeeds 10000 character limit.";
+          window.inputFileContents = "";
+           }
+            }
+            fr.readAsText(this.files[0]);
+         })
+
+    </script>
+
+</body>
+
+</html>
