@@ -25,7 +25,7 @@ func main() {
 
 	http.HandleFunc("/", index)
 
-	ip_address := "localhost:8000"
+	ip_address := "0.0.0.0:8080"
 	fmt.Printf("Running on: %s\n", ip_address)
 
 	err := http.ListenAndServe(ip_address, nil)
